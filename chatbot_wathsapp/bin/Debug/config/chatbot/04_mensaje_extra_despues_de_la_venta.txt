@@ -1,0 +1,2 @@
+mensajes_despues_de_la_venta
+mensaje despues de la venta
