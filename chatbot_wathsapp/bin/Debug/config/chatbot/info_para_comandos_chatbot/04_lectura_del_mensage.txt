@@ -1,2 +1,2 @@
 info_para_comandos
-//div[contains(@class, 'message-in')]//span[contains(@class, '_11JPr')]
+//div[@data-message-author-role="assistant"]//p or //div[@data-message-author-role="user"]

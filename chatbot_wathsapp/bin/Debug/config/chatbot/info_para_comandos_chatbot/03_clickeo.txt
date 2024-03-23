@@ -1,2 +1,2 @@
 info_para_comandos
-//ancestor::div[@class='_8nE1Y']
+//*[@id="__next"]/div/div[2]/div[1]/div[1]/div/div/div/div/nav/div[2]/div[2]/div/span[1]/div[2]/ol

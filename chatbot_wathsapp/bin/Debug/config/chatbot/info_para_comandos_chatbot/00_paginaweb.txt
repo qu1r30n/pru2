@@ -1,2 +1,2 @@
 info_para_comandos
-http://web.whatsapp.com/
+https://chat.openai.com/
