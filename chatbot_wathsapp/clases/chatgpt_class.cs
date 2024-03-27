@@ -22,7 +22,7 @@ using OpenAI_API;
 
 namespace chatbot_wathsapp.clases
 {
-    class chatbot_clase
+    class chatgpt_class
     {
         operaciones_arreglos op_arr = new operaciones_arreglos();
         operaciones_textos op_tex = new operaciones_textos();
@@ -32,8 +32,9 @@ namespace chatbot_wathsapp.clases
 
         
         string[] G_caracter_separacion_funciones_espesificas = var_fun_GG.GG_caracter_separacion_funciones_espesificas;
+        string[] G_caracter_separacion = var_fun_GG.GG_caracter_separacion;
 
-        
+        int G_donde_inicia_la_tabla = var_fun_GG.GG_indice_donde_comensar;
 
         string[] G_dir_arch_conf_chatbot =
         {
@@ -47,7 +48,13 @@ namespace chatbot_wathsapp.clases
             /*7*/Tex_base.GG_dir_bd_y_valor_inicial_bidimencional[8, 0],//"config\\chatbot\\info_para_comandos_chatbot\\07_nombre_del_clikeado.txt",
 
         };
+        public string[] G_dir_arch_transferencia =
+        {
+            /*0*/"config\\chatbot\\info_para_comandos\\bklkfjc\\1.txt",
+            /*1*/"config\\chatbot\\info_para_comandos\\bklkfjc\\2.txt",
+            /*2*/"config\\chatbot\\info_para_comandos\\bklkfjc\\3.txt",
 
+        };
 
         string[][] G_info_de_configuracion_chatbot = null;
 
@@ -102,51 +109,53 @@ namespace chatbot_wathsapp.clases
 
             //------------------------------------------------------------------------------------------
 
-
+            bool hay_pregunta = false;
             while (true)
             {
                 try
                 {
-
+                    
 
                     //checa si estan los elementos  esto sustitulle al // esperar.Until(manej => manej.FindElement(By.XPath(elementos)));//busca el elemento del no leido
                     //porque siempre marcaba error
-                    bool elementoEncontrado = false;
-                    elementoEncontrado = esperar.Until(manej =>
+                     hay_pregunta = false;
+                    hay_pregunta = esperar.Until(manej =>
                     {
-                        var cuantos_elementos = manej.FindElements(By.XPath(elementos));
-                        if (cuantos_elementos.Count > 0)
+                        string[] pregunta = bas.Leer_inicial(G_dir_arch_transferencia[0]);
+                        if (pregunta.Length > 1)
                         {
-                            // Si el elemento está presente, retorna verdadero
-                            //clickea
-                            //manejadores.FindElement(By.XPath(elementos_clase)).Click();//clickea el elemento del no leido
-                            string[] textosDelMensaje = leer_mensages_recibidos_del_mensage_clickeado(manejadores, esperar);
-                            
 
-                            //fin mensaje que resibio--------------------------------------------------------------
 
-                            Thread.Sleep(1000);
-                            try
+                            for (int i = G_donde_inicia_la_tabla; i < pregunta.Length; i++)
                             {
 
-                                //modelo_para_mandar_mensage_ia(manejadores, esperar, "tes_pruebas", textosDelMensaje);
+                                string[] mensage_esplitieado = pregunta[i].Split(G_caracter_separacion[0][0]);
+
+
+                                //fin mensaje que resibio--------------------------------------------------------------
+
+                                Thread.Sleep(1000);
+                                try
+                                {
+
+                                    modelo_para_mandar_mensage_ia(manejadores, esperar, mensage_esplitieado[0], mensage_esplitieado[1] + G_caracter_separacion_funciones_espesificas[0]);
+
+                                }
+                                catch
+                                {
+                                }
+                                Thread.Sleep(1000);
+                                hay_pregunta = true;
 
                             }
-                            catch
-                            {
-                            }
 
-
-                            Thread.Sleep(1000);
-
-                            return true;
+                            string[] inicialisar = { "sin_informacion" };
+                            bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[0], inicialisar);
                         }
-                        else
-                        {
-                            // Si el elemento no está presente, espera y luego vuelve a intentar
-                            Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
-                            return false;
-                        }
+                        // Si el elemento no está presente, espera y luego vuelve a intentar
+                        Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
+                        return hay_pregunta;
+
                     });
                     //---------------------------------------------------------------------------------------------
                     //
@@ -166,17 +175,13 @@ namespace chatbot_wathsapp.clases
         
         private void modelo_para_mandar_mensage_ia(IWebDriver manejadores, WebDriverWait esperar, string nombre_Del_que_envio_el_mensage, object texto_recibidos_arreglo_objeto)
         {
-            
             string[] textos_recibidos_srting_arr = op_arr.convierte_objeto_a_arreglo(texto_recibidos_arreglo_objeto);
-            string ultimo_mensaje = textos_recibidos_srting_arr[textos_recibidos_srting_arr.Length - 1].ToLower();//ultimo mensaje lo pone en minusculas
-            string[] lineas_del_mensaje = ultimo_mensaje.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-            acumulador_de_mensajes(nombre_Del_que_envio_el_mensage, "hola");
-
-            mandar_mens_cumulados(manejadores, esperar);
-
-            Actions action = new Actions(manejadores);
-            action.SendKeys(Keys.Escape).Perform();
-
+            mandar_mensage(esperar, textos_recibidos_srting_arr);
+            //buscar_donde_colocarlo
+            string[] textosDelMensaje = leer_respuesta_ia(esperar);
+            string texto_joineado = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje, " ");
+            bas.Agregar(G_dir_arch_transferencia[1], nombre_Del_que_envio_el_mensage + G_caracter_separacion[0] +texto_joineado);
+            
 
         }
 
@@ -210,12 +215,12 @@ namespace chatbot_wathsapp.clases
             string texto_enviar = string.Join("\n", texto_enviar_arreglo_string);
 
             escribir_msg.SendKeys(texto_enviar);
-            Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
             escribir_msg.SendKeys(Keys.Enter);
+            Thread.Sleep(3000); // Puedes ajustar el tiempo de espera según tu escenario
 
         }
 
-        private string[] leer_mensages_recibidos_del_mensage_clickeado(IWebDriver manejadores, WebDriverWait esperar)
+        private string[] leer_respuesta_ia(WebDriverWait esperar)
         {
 
             //estos son los de buscar el mensage que nos llego
@@ -224,10 +229,16 @@ namespace chatbot_wathsapp.clases
             ReadOnlyCollection<IWebElement> elementos_ = esperar.Until(manej3 => manej3.FindElements(By.XPath(elementos2)));
             
             string[] textosDelMensaje = new string[elementos_.Count];
-            for (int i = 0; i < elementos_.Count; i++)
+            for (int i = elementos_.Count-1; i > 0; i--)
             {
-                textosDelMensaje[i] = elementos_[i].Text;
+                string temp = elementos_[i].Text;
+                if ((temp[temp.Length - 1]+"") == G_caracter_separacion_funciones_espesificas[0])
+                {
+                    break;
+                }
+                textosDelMensaje[i] = temp;
             }
+            textosDelMensaje= op_arr.quitar_nulos_arreglo(textosDelMensaje);
             return textosDelMensaje;
         }
 

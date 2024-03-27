@@ -16,7 +16,7 @@ namespace chatbot_wathsapp.clases.herramientas
 
         int G_donde_inicia_la_tabla = var_fun_GG.GG_indice_donde_comensar;
 
-
+        
 
         var_fun_GG var_GG = new var_fun_GG();
         public string[] agregar_registro_del_array(string[] arreglo, string registro, string al_inicio = null)
@@ -125,8 +125,6 @@ namespace chatbot_wathsapp.clases.herramientas
             }
         }
 
-
-
         /*
         public string[][] agregar_arreglo_a_arreglo_de_arreglos(string[][] arreglo_de_arreglos, string[] nuevo_arreglo)
         {
@@ -155,10 +153,6 @@ namespace chatbot_wathsapp.clases.herramientas
             temp[arreglo_de_arreglos.Length] = nuevo_arreglo;
             return temp;
         }
-
-
-
-
 
         public string[] quitar_registro_del_array(string[] arreglo, int cantidad_a_quitar = 1, bool quitar_del_inicio = false)
         {
@@ -400,7 +394,6 @@ namespace chatbot_wathsapp.clases.herramientas
 
         }
 
-
         public string editar_incr_string_funcion_recursiva(string texto, object columnas_a_recorrer, string info_a_sustituir, string edit_0_o_increm_1 = null, object caracter_separacion_objeto = null, string caracter_separacion_dif_a_texto = null)
         {
             //string texto="0|1|2¬3°4¬5|6", object columnas_a_recorrer="2°1°1", string info_a_sustituir="10", string edit_0_o_increm_1 = "1",  string[] caracter_separacion = null, string caracter_separacion_dif_a_texto = "°"
@@ -487,8 +480,6 @@ namespace chatbot_wathsapp.clases.herramientas
             return retornar;
         }
 
-
-
         public string[] editar_busqueda_profunda_arreglo(string[] areglo, string columnas_a_recorrer, string comparar, object columnas_a_recorrer_editar, string info_a_sustituir, object caracter_separacion_objeto = null)
         {
             string[] caracter_separacion = var_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
@@ -526,7 +517,6 @@ namespace chatbot_wathsapp.clases.herramientas
             }
             return null;
         }
-
 
         public string[] editar_inc_busqueda_multiple_edicion_profunda_arreglo(string[] areglo, string columnas_a_recorrer, string comparaciones, string indices_a_editar, string info_editar, string edit_0_o_increm_1 = null, object caracter_separacion_objeto = null, string caracter_separacion_para_busqueda_multiple_profuda = null)
         {
@@ -582,8 +572,6 @@ namespace chatbot_wathsapp.clases.herramientas
             return null;
 
         }
-
-
 
         public object si_no_existe_agrega_string(string[] areglo, string columnas_a_recorrer, string comparar, string texto_a_agregar)
         {
@@ -650,7 +638,6 @@ namespace chatbot_wathsapp.clases.herramientas
         public string[] si_existe_edita_o_incrementa_si_no_agrega_string(string[] arreglo, string columnas_a_recorrer, string comparar, string texto_a_agregar, string indices_a_editar, string info_editar, string edit_0_o_increm_1 = null, object caracter_separacion_objeto = null, string caracter_separacion_para_busqueda_multiple_profuda = null)
         {
 
-
             object encontrado = si_no_existe_agrega_string(arreglo, columnas_a_recorrer, comparar, texto_a_agregar);
             string[] arreglo_a_retornar = null;
             if (encontrado is string)
@@ -667,7 +654,6 @@ namespace chatbot_wathsapp.clases.herramientas
 
         }
 
-
         public string[] agrega_textos_a_columna(string[] arreglo, string texto_a_agregar_si_es_nulo_el_arreglo, string texto_a_agregar, string columnas_agregar, object caracter_separacion_objeto = null)
         {
 
@@ -680,8 +666,6 @@ namespace chatbot_wathsapp.clases.herramientas
             return arreglo_a_retornar;
 
         }
-
-
 
         public string[] busqueda_multiple_edicion_multiple_arreglo_profunda(string[] areglo, string columnas_a_recorrer, string comparar, string indices_a_editar, string info_editar, string edit_0_o_increm_1 = null, object caracter_separacion_objeto = null, string caracter_separacion_para_busqueda_multiple_profuda = null)
         {
@@ -792,7 +776,6 @@ namespace chatbot_wathsapp.clases.herramientas
             return arreglo_a_devolver;
         }
 
-
         public string join_para_bidimensional(string[,] arregloBidimensional, string separador = null, string separador2 = null)
         {
             operaciones_textos op_tex = new operaciones_textos();
@@ -872,7 +855,6 @@ namespace chatbot_wathsapp.clases.herramientas
             string[] arreglo_a_retoranar = linea_con_arreglo_dentro.Split(caracteres_separacion[j][0]);
             return arreglo_a_retoranar;
         }
-
 
         public string[,] suma_elementos_iguales_dentro_de_un_arreglo_retorna_un_bidimencional(string[] arreglo_entrada, object caracter_separacion_func_esp_obj = null)
         {
@@ -1092,5 +1074,21 @@ namespace chatbot_wathsapp.clases.herramientas
             string[] arrelgo_a_devolver = info_a_devolver.Split(caracter_separacion[0][0]);
             return arrelgo_a_devolver;
         }
+
+        public string[] quitar_nulos_arreglo(string[] arreglo)
+        {
+            operaciones_textos op_tex = new operaciones_textos();
+            string texto_concatenado = "";
+            for (int i = 0; i < arreglo.Length; i++)
+            {
+                if (arreglo[i] != null)
+                {
+                    texto_concatenado=op_tex.concatenacion_caracter_separacion(texto_concatenado, arreglo[i], G_caracter_separacion_para_funciones_espesificas[0]);
+                }
+            }
+            string[] arreglo_a_retornar = texto_concatenado.Split(G_caracter_separacion_para_funciones_espesificas[0][0]);
+            return arreglo_a_retornar;
+        }
+
     }
 }

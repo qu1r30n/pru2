@@ -1,9 +1,9 @@
 direccion_de_las_bases_de_datos~fila_inicial~arreglo_de_filas_separado_por_§//posdata_solo_ir_agregando_archivos_asta_abajo_por_que_las_filas_ya_son_ocupadas_por_el_programa_y_no_borrar
-config\chatbot\info_para_comandos_chatbot\00_paginaweb.txt~info_para_comandos~http://web.whatsapp.com/
-config\chatbot\info_para_comandos_chatbot\01_ya_entrado_en_la_mensajeria.txt~info_para_comandos~side
-config\chatbot\info_para_comandos_chatbot\02_chequeo_no_leidos.txt~info_para_comandos~//span[contains(@aria-label, 'No leídos') or contains(@aria-label, '4 mensaje no leído') or contains(@aria-label, '3 mensaje no leído') or contains(@aria-label, '2 mensaje no leído') or contains(@aria-label, '1 mensaje no leído')]
-config\chatbot\info_para_comandos_chatbot\03_clickeo.txt~info_para_comandos~//ancestor::div[@class='_8nE1Y']
-config\chatbot\info_para_comandos_chatbot\04_lectura_del_mensage.txt~info_para_comandos~//div[contains(@class, 'message-in')]//span[contains(@class, '_11JPr')]
-config\chatbot\info_para_comandos_chatbot\05_reconocer_textbox_de_envio.txt~info_para_comandos~//*[@id='main']/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]
-config\chatbot\info_para_comandos_chatbot\06_buscar_nombre.txt~info_para_comandos~//span[contains(@title, '
-config\chatbot\info_para_comandos_chatbot\07_nombre_del_clikeado.txt~info_para_comandos~//header[@class='AmmtE']//div[@class='Mk0Bp _30scZ']§//*[@id='main']/header/div[2]/div[1]/div/span
+config\chatbot\info_para_comandos\00_paginaweb.txt~info_para_comandos~https://chat.openai.com/
+config\chatbot\info_para_comandos\01_ya_entrado_en_la_mensajeria.txt~info_para_comandos~__next
+config\chatbot\info_para_comandos\02_chequeo_no_leidos.txt~info_para_comandos~//*[@id="__next"]/div/div[2]/div[1]/div[1]/div/div/div/div/nav/div[2]/div[2]/div/span[1]/div[2]/ol~
+config\chatbot\info_para_comandos\03_clickeo.txt~info_para_comandos~//*[@id="__next"]/div/div[2]/div[1]/div[1]/div/div/div/div/nav/div[2]/div[2]/div/span[1]/div[2]/ol~
+config\chatbot\info_para_comandos\04_lectura_del_mensage.txt~info_para_comandos~//div[@data-message-author-role="assistant"]//p | //div[@data-message-author-role="user"]~
+config\chatbot\info_para_comandos\05_reconocer_textbox_de_envio.txt~info_para_comandos~//*[@id="prompt-textarea"]~
+config\chatbot\info_para_comandos\06_buscar_nombre.txt~info_para_comandos~//span[contains(@title, '
+config\chatbot\info_para_comandos\07_nombre_del_clikeado.txt~info_para_comandos~//header[@class='AmmtE']//div[@class='Mk0Bp _30scZ']§//*[@id='main']/header/div[2]/div[1]/div/span

@@ -306,6 +306,71 @@ namespace chatbot_wathsapp.clases.herramientas
 
             }
             string[] arreglo_a_retornar = temp.Split(GG_separador_para_funciones_espesificas_[0][0]);
+            cambiar_archivo_con_arreglo(direccion_archivo, arreglo_a_retornar);
+            return arreglo_a_retornar;
+        }
+        public string[] eliminar_por_numero_de_fila_opcion_arr_GG(string direccion_archivo, int num_fila_eliminar, object caracter_separacion_objeto = null,bool esta_en_arreglo_GG=true)
+        {
+            string[] caracter_separacion = var_GG.GG_funcion_caracter_separacion(caracter_separacion_objeto);
+
+            string temp = "";
+
+            if (esta_en_arreglo_GG)
+            {
+
+                string num_indice_de_direccion = sacar_indice_del_arreglo_de_direccion(direccion_archivo);
+                int num_indice_de_direccion_int = Convert.ToInt32(num_indice_de_direccion);
+
+                for (int i = G_donde_inicia_la_tabla; i < GG_base_arreglo_de_arreglos[num_indice_de_direccion_int].Length; i++)
+                {
+
+
+                    if (num_fila_eliminar == i)
+                    {
+                        break;
+                    }
+
+                    if (i > GG_base_arreglo_de_arreglos[num_indice_de_direccion_int].Length - 1)
+                    {
+                        temp = temp + GG_base_arreglo_de_arreglos[num_indice_de_direccion_int][i] + GG_separador_para_funciones_espesificas_[0];
+                    }
+                    else
+                    {
+                        temp = temp + GG_base_arreglo_de_arreglos[num_indice_de_direccion_int][i];
+                    }
+
+                }
+
+            }
+            else
+            {
+                string[] info_leida = Leer_inicial(direccion_archivo, iniciar_desde_que_fila: G_donde_inicia_la_tabla);
+
+                for (int i = G_donde_inicia_la_tabla; i < info_leida.Length; i++)
+                {
+
+
+                    if (num_fila_eliminar == i)
+                    {
+
+                    }
+                    else
+                    {
+
+
+                        if (i > info_leida.Length - 1)
+                        {
+                            temp = temp + info_leida[i] + GG_separador_para_funciones_espesificas_[0];
+                        }
+                        else
+                        {
+                            temp = temp + info_leida[i];
+                        }
+                    }
+                }
+            }
+            string[] arreglo_a_retornar = temp.Split(GG_separador_para_funciones_espesificas_[0][0]);
+            cambiar_archivo_con_arreglo(direccion_archivo, arreglo_a_retornar);
             return arreglo_a_retornar;
         }
 
@@ -374,7 +439,7 @@ namespace chatbot_wathsapp.clases.herramientas
             return exito_o_fallo;
         }
 
-        public string si_existe_suma_sino_agega_extra__SIN_ARREGLO(string direccion_archivo, int columna_a_comparar, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string texto_a_agregar, char caracter_separacion = '|', bool los_valores_seam_menores_0 = true, string valor_inicial_si_crea_archivo = null, string[] filas_iniciales_si_crea_archivo = null)
+        public string si_existe_suma_sino_agega_extra__SIN_ARREGLO_GG(string direccion_archivo, int columna_a_comparar, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string texto_a_agregar, char caracter_separacion = '|', bool los_valores_seam_menores_0 = true, string valor_inicial_si_crea_archivo = null, string[] filas_iniciales_si_crea_archivo = null)
         {
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccion_archivo,valor_inicial_si_crea_archivo,filas_iniciales_si_crea_archivo,leer_y_agrega_al_arreglo:false);
             bool bandera = false;

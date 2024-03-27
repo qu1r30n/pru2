@@ -1,2 +1,0 @@
-info_para_comandos
-//*[@id="__next"]/div/div[2]/div[1]/div[1]/div/div/div/div/nav/div[2]/div[2]/div/span[1]/div[2]/ol
