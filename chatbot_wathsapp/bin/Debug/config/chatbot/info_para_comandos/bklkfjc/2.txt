@@ -1,7 +1,0 @@
-sin_informacion
-ros|¡Excelente! ¡Me encanta escuchar eso! ¿En qué tipo de proyecto estás interesado? Ya sea que estés buscando desarrollar una aplicación, aprender un nuevo idioma, construir algo creativo o cualquier otra cosa, estaré encantado de ayudarte en lo que necesites para comenzar y progresar en tu proyecto. Cuéntame más sobre tus ideas y objetivos, y estaré aquí para brindarte orientación y apoyo.
-ros|¡Gracias! Estoy aquí para ayudar y apoyar en lo que pueda. Si necesitas ayuda con tu proyecto o tienes alguna pregunta, no dudes en decírmelo. Estoy emocionado de ver qué proyecto vas a emprender y cómo puedo contribuir a su éxito.
-ros|¡Hola! Sí, estoy listo p
-ros|La suma de 2 más 2 es igual a 4.
-ros|El factorial de un número, denotado por el símbolo "!", es el producto de todos los números enteros positivos desde 1 hasta ese número. Por ejemplo, el factorial de 5 (escrito como 5!) es igual a 5 x 4 x 3 x 2 x 1, que es igual a 120. En general, el factorial de un número n se calcula multiplicando todos los números enteros positivos desde 1 hasta n.
-ros|¡Entendido! Si necesitas ayuda adicional o tienes

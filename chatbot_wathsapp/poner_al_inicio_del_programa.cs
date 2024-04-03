@@ -58,9 +58,14 @@ namespace chatbot_wathsapp.clases
 
             chatgpt_class ch_bt = new chatgpt_class();
             //entrada_salida_y_pedido
-            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(ch_bt.G_dir_arch_transferencia[0], "sin_informacion", leer_y_agrega_al_arreglo: false);
-            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(ch_bt.G_dir_arch_transferencia[1], "sin_informacion", leer_y_agrega_al_arreglo: false);
-            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(ch_bt.G_dir_arch_transferencia[2], "sin_informacion", leer_y_agrega_al_arreglo: false);
+            for (int i = 0; i < ch_bt.G_dir_arch_transferencia.Length; i++)
+            {
+                bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(ch_bt.G_dir_arch_transferencia[i], "sin_informacion", leer_y_agrega_al_arreglo: false);
+            }
+
+            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(ch_bt.G_direccion_de_banderas_transferencias, "sin_informacion", new string[] { "1", "2", "3", "7", "8", "9" }, leer_y_agrega_al_arreglo: false);
+
+
 
 
         }

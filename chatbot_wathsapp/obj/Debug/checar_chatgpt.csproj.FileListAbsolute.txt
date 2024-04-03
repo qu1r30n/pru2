@@ -66,3 +66,4 @@ C:\Users\pc1\Documents\GitHub\pru2\chatbot_wathsapp\obj\Debug\checar_chatgpt.csp
 C:\Users\pc1\Documents\GitHub\pru2\chatbot_wathsapp\obj\Debug\checar_c.A435FEFE.Up2Date
 C:\Users\pc1\Documents\GitHub\pru2\chatbot_wathsapp\obj\Debug\chatbot_wathsapp.exe
 C:\Users\pc1\Documents\GitHub\pru2\chatbot_wathsapp\obj\Debug\chatbot_wathsapp.pdb
+C:\Users\pc1\Documents\GitHub\pru2\chatbot_wathsapp\bin\Debug\System.Drawing.Common.pdb

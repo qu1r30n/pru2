@@ -11,6 +11,7 @@ namespace chatbot_wathsapp.clases.herramientas
 {
     class Tex_base
     {
+        
 
         static public string[][] GG_base_arreglo_de_arreglos = null;
 
@@ -439,7 +440,7 @@ namespace chatbot_wathsapp.clases.herramientas
             return exito_o_fallo;
         }
 
-        public string si_existe_suma_sino_agega_extra__SIN_ARREGLO_GG(string direccion_archivo, int columna_a_comparar, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string texto_a_agregar, char caracter_separacion = '|', bool los_valores_seam_menores_0 = true, string valor_inicial_si_crea_archivo = null, string[] filas_iniciales_si_crea_archivo = null)
+        public string si_existe_suma_sino_agega_extra_SIN_ARREGLO_GG(string direccion_archivo, int columna_a_comparar, string comparar, string numero_columnas_editar, string cantidad_a_sumar, string texto_a_agregar, char caracter_separacion = '|', bool los_valores_seam_menores_0 = true, string valor_inicial_si_crea_archivo = null, string[] filas_iniciales_si_crea_archivo = null)
         {
             Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(direccion_archivo,valor_inicial_si_crea_archivo,filas_iniciales_si_crea_archivo,leer_y_agrega_al_arreglo:false);
             bool bandera = false;
@@ -515,6 +516,54 @@ namespace chatbot_wathsapp.clases.herramientas
             return exito_o_fallo;
         }
 
+        public string Editar_fila_espesifica_SIN_ARREGLO_GG(string direccion_archivo, int num_fila, string editar_info)
+        {
+            
+
+            StreamReader sr = new StreamReader(direccion_archivo);
+            string dir_tem = direccion_archivo.Replace(".txt", "_tem.txt");
+            StreamWriter sw = new StreamWriter(dir_tem, true);
+            string exito_o_fallo;
+
+            try
+            {
+                int id_linea = 0;
+                
+                while (sr.Peek() >= 0)//verificamos si hay mas lineas a leer
+                {
+                    string linea = sr.ReadLine();//leemos linea y lo guardamos en palabra
+                    if (linea != null)
+                    {
+
+                        if (id_linea == num_fila)
+                        {
+                            sw.WriteLine(editar_info);
+
+                        }
+                        else
+                        {
+                            sw.WriteLine(linea);
+                        }
+
+                        id_linea++;
+                    }
+                }
+                exito_o_fallo = "1)exito";
+                sr.Close();
+                sw.Close();
+                File.Delete(direccion_archivo);//borramos el archivo original
+                File.Move(dir_tem, direccion_archivo);//renombramos el archivo temporal por el que tenia el original
+
+            }
+            catch (Exception error)
+            {
+                sr.Close();
+                sw.Close();
+                exito_o_fallo = "2)error:" + error;
+                File.Delete(dir_tem);//borramos el archivo original
+            }
+            return exito_o_fallo;
+        }
 
     }
 }

@@ -50,11 +50,24 @@ namespace chatbot_wathsapp.clases
         };
         public string[] G_dir_arch_transferencia =
         {
-            /*0*/"config\\chatbot\\info_para_comandos\\bklkfjc\\1.txt",
-            /*1*/"config\\chatbot\\info_para_comandos\\bklkfjc\\2.txt",
-            /*2*/"config\\chatbot\\info_para_comandos\\bklkfjc\\3.txt",
-
+            /*0*//*1*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\no_hacer_caso.txt",//no_hacer_caso
+            /*1*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\1.txt",//preguntas
+            /*2*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\2.txt",//respuestas
+            /*3*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\3.txt",//pedidos
+            /*4*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\4.txt",//agregar preguntas para_watsap desde el watsap o lectura del chatbot depende la bandera
+            /*5*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\5.txt",//agregar respuestas  para_chatbot desde el watsap o lectura del chatbot depende la bandera
+            /*6*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\6.txt",//agregar pedidos para_watsap desde el watsap o lectura del chatbot depende la bandera
+            /*7*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\7.txt",//agregar pregunta  para_chatbot desde el watsap o lectura del chatbot depende la bandera
+            /*8*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\8.txt",//agregar respuesta para_watsap desde el watsap o lectura del chatbot depende la bandera
+            /*9*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\9.txt",//agregar pedidos  para_chatbot desde el watsap o lectura del chatbot depende la bandera
+            /*10*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\10.txt",//agregar pregunta  para_chatbot desde el watsap o lectura del chatbot depende la bandera
+            /*11*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\11.txt",//agregar respuesta para_watsap desde el watsap o lectura del chatbot depende la bandera
+            /*12*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\xerox\\config\\inf\\bklkfjc\\12.txt",//agregar pedidos  para_chatbot desde el watsap o lectura del chatbot depende la bandera
         };
+        public string G_direccion_de_banderas_transferencias =/*0*/Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\xerox\\config\\inf\\bklkfjc\\b.txt";
+        
+        int id_grup_transferencias = 0;
+        
 
         string[][] G_info_de_configuracion_chatbot = null;
 
@@ -121,36 +134,44 @@ namespace chatbot_wathsapp.clases
                      hay_pregunta = false;
                     hay_pregunta = esperar.Until(manej =>
                     {
-                        string[] pregunta = bas.Leer_inicial(G_dir_arch_transferencia[0]);
-                        if (pregunta.Length > 1)
+                        string numero_archivo_a_leer = checar_numero_de_direccion_de_archivo_y_cambiar(1);
+                        
+
+                        if (numero_archivo_a_leer != null)
                         {
+                            int numero_archivo_a_leer_int = Convert.ToInt32(numero_archivo_a_leer);
 
+                            string[] pregunta = bas.Leer_inicial(G_dir_arch_transferencia[numero_archivo_a_leer_int]);
 
-                            for (int i = G_donde_inicia_la_tabla; i < pregunta.Length; i++)
+                            if (pregunta.Length > 1)
                             {
 
-                                string[] mensage_esplitieado = pregunta[i].Split(G_caracter_separacion[0][0]);
-
-
-                                //fin mensaje que resibio--------------------------------------------------------------
-
-                                Thread.Sleep(1000);
-                                try
+                                for (int i = G_donde_inicia_la_tabla; i < pregunta.Length; i++)
                                 {
 
-                                    modelo_para_mandar_mensage_ia(manejadores, esperar, mensage_esplitieado[0], mensage_esplitieado[1] + G_caracter_separacion_funciones_espesificas[0]);
+                                    string[] mensage_esplitieado = pregunta[i].Split(G_caracter_separacion_funciones_espesificas[1][0]);
+
+
+                                    //fin mensaje que resibio--------------------------------------------------------------
+
+                                    Thread.Sleep(1000);
+                                    try
+                                    {
+
+                                        modelo_para_mandar_mensage_ia(manejadores, esperar, mensage_esplitieado[0], mensage_esplitieado[1] + G_caracter_separacion_funciones_espesificas[0]);
+
+                                    }
+                                    catch
+                                    {
+                                    }
+                                    Thread.Sleep(1000);
+                                    hay_pregunta = true;
 
                                 }
-                                catch
-                                {
-                                }
-                                Thread.Sleep(1000);
-                                hay_pregunta = true;
 
+                                string[] inicialisar = { "sin_informacion" };
+                                bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[numero_archivo_a_leer_int], inicialisar);
                             }
-
-                            string[] inicialisar = { "sin_informacion" };
-                            bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[0], inicialisar);
                         }
                         // Si el elemento no está presente, espera y luego vuelve a intentar
                         Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
@@ -175,12 +196,16 @@ namespace chatbot_wathsapp.clases
         
         private void modelo_para_mandar_mensage_ia(IWebDriver manejadores, WebDriverWait esperar, string nombre_Del_que_envio_el_mensage, object texto_recibidos_arreglo_objeto)
         {
+            
             string[] textos_recibidos_srting_arr = op_arr.convierte_objeto_a_arreglo(texto_recibidos_arreglo_objeto);
             mandar_mensage(esperar, textos_recibidos_srting_arr);
             //buscar_donde_colocarlo
             string[] textosDelMensaje = leer_respuesta_ia(esperar);
             string texto_joineado = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje, " ");
-            bas.Agregar(G_dir_arch_transferencia[1], nombre_Del_que_envio_el_mensage + G_caracter_separacion[0] +texto_joineado);
+            
+            string numero_archivo_a_leer = checar_numero_de_direccion_de_archivo_y_cambiar(2);
+            int numero_archivo_a_leer_int = Convert.ToInt32(numero_archivo_a_leer);
+            bas.Agregar(G_dir_arch_transferencia[numero_archivo_a_leer_int], nombre_Del_que_envio_el_mensage + G_caracter_separacion_funciones_espesificas[1] +texto_joineado);
             
 
         }
@@ -242,70 +267,6 @@ namespace chatbot_wathsapp.clases
             return textosDelMensaje;
         }
 
-
-        private IWebElement GetUltimoElementoNoNulo(ReadOnlyCollection<IWebElement> elementos)
-        {
-            string[] temp = new string[elementos.Count];
-            for (int i = elementos.Count - 1; i >= 0; i--)
-            {
-                temp[i] = elementos[i].Text;
-                if (temp[i] != null && temp[i] != "")
-                {
-                    return elementos[i];
-                }
-            }
-            return null;
-        }
-
-
-        private string nombre_del_clickeado(IWebDriver manejadores, WebDriverWait esperar)
-        {
-            string nombre_a_devolver = esperar.Until(manej2 =>
-            {
-                try
-                {
-                    return manej2.FindElement(By.XPath(G_info_de_configuracion_chatbot[7][1])).Text;
-                }
-                catch
-                {
-
-                    return manej2.FindElement(By.XPath(G_info_de_configuracion_chatbot[7][2])).Text;
-
-                }
-
-            });
-
-
-
-            return nombre_a_devolver;
-
-        }
-
-        private string GenerarCadenaConFechaHoraAleatoria(int cant_caracteres = 4)
-        {
-            // Obtiene la hora actual con segundos
-            string HoraConSegundos = DateTime.Now.ToString("HHmmss");
-
-            // Inicializa la semilla usando el reloj del sistema
-            int semilla = Environment.TickCount;
-            Random aleatorio = new Random(semilla);
-
-            // Genera una cadena aleatoria de longitud variable (entre 0 y 10 caracteres)
-            int longitud = aleatorio.Next(cant_caracteres);
-            string caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            char[] cadenaAleatoria = new char[longitud];
-
-            for (int i = 0; i < longitud; i++)
-            {
-                cadenaAleatoria[i] = caracteres[aleatorio.Next(caracteres.Length)];
-            }
-
-            // Combina la fecha y hora con la cadena aleatoria
-            string resultado = HoraConSegundos + new string(cadenaAleatoria);
-
-            return resultado;
-        }
-
         private string[][] extraer_info_de_archivos_de_configuracion_chatbot(string[] direcciones)
         {
 
@@ -359,8 +320,6 @@ namespace chatbot_wathsapp.clases
 
         }
 
-        
-
         public string quitando_el_primeros_caracters_y_checa_si_es_int(string dato_a_checar, int numero_de_caracteres_a_quitar = 1)
         {
             string dato_sin_el_primer_caracter = op_tex.joineada_paraesida_y_quitador_de_extremos_del_string(dato_a_checar, restar_cuantas_ultimas_o_primeras_celdas: numero_de_caracteres_a_quitar, restar_primera_celda: true);
@@ -376,7 +335,40 @@ namespace chatbot_wathsapp.clases
         }
 
 
-        
+        public string checar_numero_de_direccion_de_archivo_y_cambiar(int posicion)
+        {
+            string nuevo_grupo = null;
+            if (posicion < 4 && posicion > 0)
+            {
+                string[] banderas = bas.Leer_inicial(G_direccion_de_banderas_transferencias);
+                int numero_grupo_ia = Convert.ToInt32(banderas[posicion]);
+                numero_grupo_ia = numero_grupo_ia + 3;
+                int numero_grupo_wat = Convert.ToInt32(banderas[posicion + 3]);
+
+                do
+                {
+
+                    if (numero_grupo_ia == numero_grupo_wat)
+                    {
+
+                    }
+                    else if (G_dir_arch_transferencia.Length+1 <= numero_grupo_ia)
+                    {
+                        bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, posicion, posicion + "");
+                        nuevo_grupo = posicion+"";
+                    }
+                    else
+                    {
+
+                        bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, posicion, numero_grupo_ia + "");
+                        nuevo_grupo = numero_grupo_ia + "";
+                    }
+                    Thread.Sleep(1000);
+                } while (numero_grupo_ia == numero_grupo_wat);
+
+            }
+            return nuevo_grupo;
+        }
 
     }
 }
