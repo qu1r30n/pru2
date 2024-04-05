@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\pc1\\Documents\\GitHub\\pru2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{35750800-E5ED-46DD-9CC8-D4818ADA345C}|chatbot_wathsapp\\checar_chatgpt.csproj|C:\\Users\\pc1\\Documents\\GitHub\\pru2\\chatbot_wathsapp\\clases\\chatgpt_class.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{35750800-E5ED-46DD-9CC8-D4818ADA345C}|chatbot_wathsapp\\checar_chatgpt.csproj|c:\\users\\pc1\\documents\\github\\pru2\\chatbot_wathsapp\\clases\\chatgpt_class.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{35750800-E5ED-46DD-9CC8-D4818ADA345C}|chatbot_wathsapp\\checar_chatgpt.csproj|solutionrelative:chatbot_wathsapp\\clases\\chatgpt_class.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{35750800-E5ED-46DD-9CC8-D4818ADA345C}|chatbot_wathsapp\\checar_chatgpt.csproj|c:\\users\\pc1\\documents\\github\\pru2\\chatbot_wathsapp\\poner_al_inicio_del_programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{35750800-E5ED-46DD-9CC8-D4818ADA345C}|chatbot_wathsapp\\checar_chatgpt.csproj|C:\\Users\\pc1\\Documents\\GitHub\\pru2\\chatbot_wathsapp\\poner_al_inicio_del_programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{35750800-E5ED-46DD-9CC8-D4818ADA345C}|chatbot_wathsapp\\checar_chatgpt.csproj|solutionrelative:chatbot_wathsapp\\poner_al_inicio_del_programa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -70,8 +70,7 @@
               "RelativeToolTip": "chatbot_wathsapp\\poner_al_inicio_del_programa.cs",
               "ViewState": "AQIAADMAAAAAAAAAAAAIwEAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-22T17:05:48.57Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-22T17:05:48.57Z"
             },
             {
               "$type": "Document",
@@ -81,7 +80,7 @@
               "RelativeDocumentMoniker": "chatbot_wathsapp\\clases\\chatgpt_class.cs",
               "ToolTip": "C:\\Users\\pc1\\Documents\\GitHub\\pru2\\chatbot_wathsapp\\clases\\chatgpt_class.cs",
               "RelativeToolTip": "chatbot_wathsapp\\clases\\chatgpt_class.cs",
-              "ViewState": "AQIAAH0AAAAAAAAAAAAIwI0AAABjAAAA",
+              "ViewState": "AQIAAI4AAAAAAAAAAAAcwKYAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-20T22:14:34.162Z",
               "EditorCaption": ""
@@ -96,8 +95,7 @@
               "RelativeToolTip": "chatbot_wathsapp\\clases\\herramientas\\operaciones_textos.cs",
               "ViewState": "AQIAABIAAAAAAAAAAAAIwCgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T18:45:36.137Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-26T18:45:36.137Z"
             },
             {
               "$type": "Document",
@@ -109,8 +107,7 @@
               "RelativeToolTip": "chatbot_wathsapp\\clases\\herramientas\\Tex_base.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T03:26:33.909Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-26T03:26:33.909Z"
             },
             {
               "$type": "Document",
@@ -122,8 +119,7 @@
               "RelativeToolTip": "chatbot_wathsapp\\clases\\herramientas\\operaciones_arreglos.cs",
               "ViewState": "AQIAACgAAAAAAAAAAAD4vzcAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-23T16:41:51.42Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-23T16:41:51.42Z"
             },
             {
               "$type": "Document",
