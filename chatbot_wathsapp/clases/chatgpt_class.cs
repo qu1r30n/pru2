@@ -134,12 +134,12 @@ namespace chatbot_wathsapp.clases
                      hay_pregunta = false;
                     hay_pregunta = esperar.Until(manej =>
                     {
-                        string numero_archivo_a_leer = checar_numero_de_direccion_de_archivo_y_cambiar(1);
+                        int[] numero_archivo_a_leer = checar_id_borrar_id_agregar_archivos_donde_procesar(1);
                         
 
-                        if (numero_archivo_a_leer != null)
+                        if (numero_archivo_a_leer[0] != -1)
                         {
-                            int numero_archivo_a_leer_int = Convert.ToInt32(numero_archivo_a_leer);
+                            int numero_archivo_a_leer_int = Convert.ToInt32(numero_archivo_a_leer[0]);
 
                             string[] pregunta = bas.Leer_inicial(G_dir_arch_transferencia[numero_archivo_a_leer_int]);
 
@@ -171,7 +171,9 @@ namespace chatbot_wathsapp.clases
 
                                 string[] inicialisar = { "sin_informacion" };
                                 bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[numero_archivo_a_leer_int], inicialisar);
+                                
                             }
+                            bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 1, (numero_archivo_a_leer[0] + 3) + "");
                         }
                         // Si el elemento no está presente, espera y luego vuelve a intentar
                         Thread.Sleep(1000); // Puedes ajustar el tiempo de espera según tu escenario
@@ -203,9 +205,9 @@ namespace chatbot_wathsapp.clases
             string[] textosDelMensaje = leer_respuesta_ia(esperar);
             string texto_joineado = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje, " ");
             
-            string numero_archivo_a_leer = checar_numero_de_direccion_de_archivo_y_cambiar(2);
-            int numero_archivo_a_leer_int = Convert.ToInt32(numero_archivo_a_leer);
-            bas.Agregar(G_dir_arch_transferencia[numero_archivo_a_leer_int], nombre_Del_que_envio_el_mensage + G_caracter_separacion_funciones_espesificas[1] +texto_joineado);
+            int[] numero_archivo_a_leer = checar_id_borrar_id_agregar_archivos_donde_procesar(2,true);
+            
+            bas.Agregar(G_dir_arch_transferencia[numero_archivo_a_leer[1]], nombre_Del_que_envio_el_mensage + G_caracter_separacion_funciones_espesificas[1] +texto_joineado);
             
 
         }
@@ -334,40 +336,76 @@ namespace chatbot_wathsapp.clases
             }
         }
 
-
-        public string checar_numero_de_direccion_de_archivo_y_cambiar(int posicion)
+        public int[] checar_numero_de_direccion_de_archivo_atras_actual_adelante(int posicion, bool posision_mas_3 = false)
         {
-            string nuevo_grupo = null;
-            if (posicion < 4 && posicion > 0)
+            int posicion_inicial = posicion;
+            string[] banderas = bas.Leer_inicial(G_direccion_de_banderas_transferencias);
+
+            if (posision_mas_3 == true)
             {
-                string[] banderas = bas.Leer_inicial(G_direccion_de_banderas_transferencias);
-                int numero_grupo_ia = Convert.ToInt32(banderas[posicion]);
-                numero_grupo_ia = numero_grupo_ia + 3;
-                int numero_grupo_wat = Convert.ToInt32(banderas[posicion + 3]);
+                posicion = posicion + 3;
+            }
 
-                do
+            int numero_actual_posision = Convert.ToInt32(banderas[posicion]);
+            int numero_adelante_posision = numero_actual_posision + 3;
+            int numero_atras_posision = numero_actual_posision - 3;
+            int[] arr_devolver = { -1, -1, -1 };
+
+            if (posicion_inicial > 0 && posicion_inicial < 4)
+            {
+                if (G_dir_arch_transferencia.Length <= numero_adelante_posision)
                 {
-
-                    if (numero_grupo_ia == numero_grupo_wat)
-                    {
-
-                    }
-                    else if (G_dir_arch_transferencia.Length+1 <= numero_grupo_ia)
-                    {
-                        bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, posicion, posicion + "");
-                        nuevo_grupo = posicion+"";
-                    }
-                    else
-                    {
-
-                        bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, posicion, numero_grupo_ia + "");
-                        nuevo_grupo = numero_grupo_ia + "";
-                    }
-                    Thread.Sleep(1000);
-                } while (numero_grupo_ia == numero_grupo_wat);
+                    numero_adelante_posision = posicion_inicial;
+                }
+                if (1 > numero_actual_posision - 3)
+                {
+                    numero_atras_posision = (G_dir_arch_transferencia.Length - 4) + posicion_inicial;
+                }
+                arr_devolver[0] = numero_atras_posision;
+                arr_devolver[1] = numero_actual_posision;
+                arr_devolver[2] = numero_adelante_posision;
 
             }
-            return nuevo_grupo;
+
+
+            return arr_devolver;
+
+        }
+
+        public int[] checar_id_borrar_id_agregar_archivos_donde_procesar(int posicion, bool proceso_agregar = false)
+        {
+            int[] id_posiciones_a_devolver = { -1, -1 };
+            int[] numero_archivo_a_leer_borrar = checar_numero_de_direccion_de_archivo_atras_actual_adelante(posicion);
+            int[] numero_archivo_a_leer_agregar = checar_numero_de_direccion_de_archivo_atras_actual_adelante(posicion, true);
+            //numero_archivo_a_leer_..[0] es el archivo anterior
+            //numero_archivo_a_leer_..[1] es el archivo actual
+            //numero_archivo_a_leer_..[2] es el archivo siguiente
+            if (proceso_agregar)
+            {
+                id_posiciones_a_devolver[0] = numero_archivo_a_leer_borrar[1];//este siempre estara atras
+                if (numero_archivo_a_leer_borrar[1] == numero_archivo_a_leer_agregar[1] || numero_archivo_a_leer_borrar[1] == numero_archivo_a_leer_agregar[0])
+                {
+                    id_posiciones_a_devolver[1] = numero_archivo_a_leer_agregar[2];
+                }
+                else
+                {
+                    id_posiciones_a_devolver[1] = numero_archivo_a_leer_agregar[1];
+                }
+            }
+            else
+            {
+                if (numero_archivo_a_leer_borrar[1] == numero_archivo_a_leer_agregar[1])
+                {
+                    id_posiciones_a_devolver[0] = -1;
+
+                }
+                else
+                {
+                    id_posiciones_a_devolver[0] = numero_archivo_a_leer_borrar[1];
+                }
+            }
+
+            return id_posiciones_a_devolver;
         }
 
     }
