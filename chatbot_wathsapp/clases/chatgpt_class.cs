@@ -383,10 +383,25 @@ namespace chatbot_wathsapp.clases
 
             else if (ia_ws == "ia")//envia info de archivos respuesta y elimina la informacion
             {
-                if (id_atras_actual_adelante_1[1] == id_atras_actual_adelante_2[1]) 
+                if (id_atras_actual_adelante_1[1] == id_atras_actual_adelante_2[1])
                 {
-                    
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 4, id_atras_actual_adelante_2[2] + "");
+                    string[] lee_preguntas_ia = bas.Leer_inicial(G_dir_arch_transferencia[id_atras_actual_adelante_1[1]]);
+                    if (1 < lee_preguntas_ia.Length)
+                    {
+                        for (int i = G_donde_inicia_la_tabla; i < lee_preguntas_ia.Length; i++)
+                        {
+                            string[] pregunta_espliteada = lee_preguntas_ia[i].Split(G_caracter_separacion_funciones_espesificas[1][0]);
+                            mandar_mensage(esperar, pregunta_espliteada[1] + G_caracter_separacion_funciones_espesificas[0]);
+                            Thread.Sleep(5000);
+                            string textosDelMensaje = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(leer_respuesta_ia(esperar));
+                            string texto_joineado = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje, " ");
+                            datos_entrada(pregunta_espliteada[0], texto_joineado);
+                        }
+
+                        bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_1[1]], new string[] { "sin_informacion" });
+
+                        //bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 1, id_atras_actual_adelante_2[2] + "");
+                    }
                 }
                 else
                 {
@@ -403,9 +418,9 @@ namespace chatbot_wathsapp.clases
                             datos_entrada(pregunta_espliteada[0], texto_joineado);
                         }
 
-                        bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
+                        bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_1[1]], new string[] { "sin_informacion" });
                     }
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 1, id_atras_actual_adelante_2[2] + "");
+                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 1, id_atras_actual_adelante_1[2] + "");
                 }
 
 
