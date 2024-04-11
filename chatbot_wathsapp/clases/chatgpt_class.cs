@@ -296,7 +296,18 @@ namespace chatbot_wathsapp.clases
 
             if (G_dir_arch_transferencia.Length <= numero_adelante_posision)
             {
-                numero_adelante_posision = posicion_bandera;
+                if (numero_adelante_posision < 3)
+                {
+                    numero_adelante_posision = posicion_bandera;
+                }
+                else
+                {
+                    numero_adelante_posision = posicion_bandera;
+                    while (numero_adelante_posision > 3)
+                    {
+                        numero_adelante_posision = numero_adelante_posision - 3;
+                    }
+                }
             }
             if (1 > numero_actual_posision - 3)
             {
@@ -341,7 +352,7 @@ namespace chatbot_wathsapp.clases
                 if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[1])
                 {
                     bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage);
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 5, (id_atras_actual_adelante_ws_2[2] + 3) + "");
+                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 5, id_atras_actual_adelante_ws_2[2] + "");
                 }
                 else
                 {
