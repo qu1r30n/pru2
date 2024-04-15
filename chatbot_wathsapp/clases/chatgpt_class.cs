@@ -394,7 +394,8 @@ namespace chatbot_wathsapp.clases
                             mandar_mensage(esperar, pregunta_espliteada[1] + G_caracter_separacion_funciones_espesificas[0]);
                             Thread.Sleep(10000);
                             string textosDelMensaje = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(leer_respuesta_ia(esperar));
-                            string texto_joineado = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje, " ");
+                            textosDelMensaje=op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje.Split(new string[] { "\r\n" }, StringSplitOptions.None));
+                            string texto_joineado = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje, "                  ");
                             datos_entrada(pregunta_espliteada[0], texto_joineado);
                         }
 
