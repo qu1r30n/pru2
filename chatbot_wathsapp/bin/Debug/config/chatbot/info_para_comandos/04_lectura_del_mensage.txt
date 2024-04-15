@@ -1,2 +1,3 @@
 info_para_comandos
-//div[@data-message-author-role="assistant"]//p | //div[@data-message-author-role="user"]
+//div[@data-message-author-role="assistant"]//p | //div[@data-message-author-role="user"] | //div[@code="!whitespace-pre hljs"]
+

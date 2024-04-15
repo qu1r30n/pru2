@@ -328,36 +328,45 @@ namespace chatbot_wathsapp.clases
         public void datos_entrada(string contacto, string mensage, string ia_ws = "ia")
         {
 
-            if (ia_ws == "ws")//agrega a archivos pregunta de la ia
-            {
-                int[] id_atras_actual_adelante_ia_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(1);//esta es de la ia
-                int[] id_atras_actual_adelante_ws_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(5);//este es del ws
-                if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[1])
-                {
-                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage);
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 5, (id_atras_actual_adelante_ws_2[2] + 3) + "");
-                }
-                else
-                {
-                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage);
-                }
 
-
-            }
-
-            else if (ia_ws == "ia")//agrega a archivos pregunta de la ia
+            if (ia_ws == "ia")//agrega a archivos pregunta de la ia
             {
                 int[] id_atras_actual_adelante_ia_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(2);//esta es de la ia
                 int[] id_atras_actual_adelante_ws_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(5);//este es del ws
-                if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[1])
+                string[] pedido_sie_es_mas_de_1 = mensage.Split(G_caracter_separacion_funciones_espesificas[2][0]);
+                if (pedido_sie_es_mas_de_1.Length <= 1)
                 {
-                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage);
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 5, id_atras_actual_adelante_ws_2[2] + "");
+                    if (id_atras_actual_adelante_ws_2[1] == id_atras_actual_adelante_ia_1[1])
+                    {
+                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage);
+                        bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 2, id_atras_actual_adelante_ia_1[2] + "");
+                    }
+                    else
+                    {
+                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage);
+                    }
                 }
                 else
                 {
-                    bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ws_2[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage);
+                    int[] id_atras_actual_adelante_pedido_ia_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(3);//esta es de la ia
+                    int[] id_atras_actual_adelante_pedido_ws_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(6);//este es del ws
+
+                    if (id_atras_actual_adelante_pedido_ws_2[1] == id_atras_actual_adelante_pedido_ia_1[1])
+                    {
+                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_pedido_ia_1[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + pedido_sie_es_mas_de_1[1]);
+                        bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 3, id_atras_actual_adelante_pedido_ia_1[2] + "");
+
+                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage);
+                        bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 2, id_atras_actual_adelante_ia_1[2] + "");
+                    }
+                    else
+                    {
+                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_pedido_ia_1[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + pedido_sie_es_mas_de_1[1]);
+
+                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + mensage);
+                    }
                 }
+                
 
 
             }
@@ -370,29 +379,9 @@ namespace chatbot_wathsapp.clases
             int[] id_atras_actual_adelante_1 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(1);//esta es de la ia
             int[] id_atras_actual_adelante_2 = checar_numero_de_direccion_de_archivo_atras_actual_adelante(4);//este es del ws
 
-            if (ia_ws == "ws")//envia info de archivos respuesta y elimina la informacion
-            {
-                if (id_atras_actual_adelante_1[1] == id_atras_actual_adelante_2[1])
-                {
+            
 
-                }
-                else
-                {
-                    string[] respuestas_ia = bas.Leer_inicial(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]]);
-                    for (int i = G_donde_inicia_la_tabla; i < respuestas_ia.Length; i++)
-                    {
-                        string[] res_espliteada = respuestas_ia[i].Split(G_caracter_separacion_funciones_espesificas[1][0]);
-                       // regresr_respuesta_ia(manejadores, esperar, res_espliteada[0], res_espliteada[1]);
-                    }
-
-                    bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_2[1]], new string[] { "sin_informacion" });
-                    bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 5, id_atras_actual_adelante_2[2] + "");
-                }
-
-
-            }
-
-            else if (ia_ws == "ia")//envia info de archivos respuesta y elimina la informacion
+            if (ia_ws == "ia")//envia info de archivos respuesta y elimina la informacion
             {
                 if (id_atras_actual_adelante_1[1] == id_atras_actual_adelante_2[1])
                 {
@@ -403,7 +392,7 @@ namespace chatbot_wathsapp.clases
                         {
                             string[] pregunta_espliteada = lee_preguntas_ia[i].Split(G_caracter_separacion_funciones_espesificas[1][0]);
                             mandar_mensage(esperar, pregunta_espliteada[1] + G_caracter_separacion_funciones_espesificas[0]);
-                            Thread.Sleep(5000);
+                            Thread.Sleep(10000);
                             string textosDelMensaje = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(leer_respuesta_ia(esperar));
                             string texto_joineado = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje, " ");
                             datos_entrada(pregunta_espliteada[0], texto_joineado);
