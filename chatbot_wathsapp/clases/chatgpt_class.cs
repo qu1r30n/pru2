@@ -353,7 +353,7 @@ namespace chatbot_wathsapp.clases
 
                     if (id_atras_actual_adelante_pedido_ws_2[1] == id_atras_actual_adelante_pedido_ia_1[1])
                     {
-                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_pedido_ia_1[2]], "Vendedores" + G_caracter_separacion_funciones_espesificas[1] + contacto + G_caracter_separacion_funciones_espesificas[2] + pedido_sie_es_mas_de_1[1]);
+                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_pedido_ia_1[2]], "Vendedores" + G_caracter_separacion_funciones_espesificas[1] + contacto + G_caracter_separacion[0] + mensage);
                         bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 3, id_atras_actual_adelante_pedido_ia_1[2] + "");
 
                         bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[2]], contacto + G_caracter_separacion_funciones_espesificas[1] + "ya fue mandado su pedido");
@@ -361,7 +361,7 @@ namespace chatbot_wathsapp.clases
                     }
                     else
                     {
-                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_pedido_ia_1[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + contacto + G_caracter_separacion_funciones_espesificas[2] + pedido_sie_es_mas_de_1[1]);
+                        bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_pedido_ia_1[1]], "Vendedores" + G_caracter_separacion_funciones_espesificas[1] + contacto + G_caracter_separacion + pedido_sie_es_mas_de_1[1]);
 
                         bas.Agregar_a_archivo_sin_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_ia_1[1]], contacto + G_caracter_separacion_funciones_espesificas[1] + "ya fue mandado su pedido");
                     }
@@ -395,6 +395,7 @@ namespace chatbot_wathsapp.clases
                             Thread.Sleep(10000);
                             string textosDelMensaje = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(leer_respuesta_ia(esperar));
                             textosDelMensaje=op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje.Split(new string[] { "\r\n" }, StringSplitOptions.None));
+                            textosDelMensaje = textosDelMensaje.Replace(G_caracter_separacion[0], ":");
                             string texto_joineado = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje, " ");
                             datos_entrada(pregunta_espliteada[0], texto_joineado);
                         }
@@ -415,6 +416,7 @@ namespace chatbot_wathsapp.clases
                             mandar_mensage(esperar, pregunta_espliteada[1]);
                             Thread.Sleep(5000);
                             string textosDelMensaje = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(leer_respuesta_ia(esperar));
+                            textosDelMensaje = textosDelMensaje.Replace(G_caracter_separacion[0], ":");
                             string texto_joineado = op_tex.joineada_paraesida_SIN_NULOS_y_quitador_de_extremos_del_string(textosDelMensaje, " ");
                             datos_entrada(pregunta_espliteada[0], texto_joineado);
                         }
