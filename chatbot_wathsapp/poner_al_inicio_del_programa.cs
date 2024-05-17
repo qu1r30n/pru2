@@ -64,7 +64,8 @@ namespace chatbot_wathsapp.clases
             }
 
             bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(ch_bt.G_direccion_de_banderas_transferencias, "sin_informacion", new string[] { "1", "2", "3", "7", "8", "9" }, leer_y_agrega_al_arreglo: false);
-
+            
+            bas.Crear_archivo_y_directorio_opcion_leer_y_agrega_arreglo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\banderas.txt", "0_puede_enviar_mensaje_1_espera_a_que_se_desocupe_ia", new string[] { "0" }, leer_y_agrega_al_arreglo: false);
 
 
 

@@ -402,7 +402,7 @@ namespace chatbot_wathsapp.clases
 
                         bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_1[1]], new string[] { "sin_informacion" });
 
-                        //bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 1, id_atras_actual_adelante_2[2] + "");
+                        bas.Editar_fila_espesifica_SIN_ARREGLO_GG(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\banderas.txt", 1, "0");//este le dice al chatbot que puede volver a preguntar
                     }
                 }
                 else
@@ -422,10 +422,12 @@ namespace chatbot_wathsapp.clases
                         }
 
                         bas.cambiar_archivo_con_arreglo(G_dir_arch_transferencia[id_atras_actual_adelante_1[1]], new string[] { "sin_informacion" });
+                        bas.Editar_fila_espesifica_SIN_ARREGLO_GG(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "config\\chatbot\\banderas.txt", 1, "0");//este le dice al chatbot que puede volver a preguntar
                     }
                     bas.Editar_fila_espesifica_SIN_ARREGLO_GG(G_direccion_de_banderas_transferencias, 1, id_atras_actual_adelante_1[2] + "");
-                }
 
+                }
+                
 
             }
 
